@@ -37,4 +37,4 @@ const CartProvider = ({children}) => {
 
 export default CartProvider;
 
-export { CartContext }
+export { CartContext, Consumer }

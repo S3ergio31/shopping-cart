@@ -1,12 +1,8 @@
-import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import { Box, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-
-const ListItem = styled("li")(({ theme }) => ({
-  margin: theme.spacing(0.5),
-}));
+import ListItem from "../styled-components/ListItem.style";
 
 const Categories = ({ 
   onSelect, 

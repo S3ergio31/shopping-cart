@@ -10,7 +10,6 @@ import {
   IconButton,
   Rating,
   Snackbar,
-  styled,
   Tooltip,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -19,22 +18,7 @@ import { useContext, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { CartContext } from "../context/CartProvider";
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  const description = expand ? "Hide description" : "Show description";
-  return (
-    <>
-      <Typography marginLeft="auto"> {description} </Typography>
-      <IconButton {...other} />
-    </>
-  );
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import ExpandMore from "../styled-components/ExpandMore.style";
 
 const ProductCard = ({ product }) => {
   const [expanded, setExpanded] = useState(false);
