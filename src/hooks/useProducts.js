@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getAllCategories, getAllProducts } from "../services/products";
 
 export default function useProducts() {
@@ -8,18 +9,22 @@ export default function useProducts() {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     getAllCategories()
-      .then((categories) => setCategories([...categories, 'all']))
+      .then((categories) => setCategories([...categories, "all"]))
       .finally(() => setLoadingCategories(false));
   }, []);
+
+  useEffect(() => {
+    handleSelectedProduct(getProductFromUrl());
+  }, [products])
 
   useEffect(() => {
     getAllProducts()
       .then((products) => {
         setProducts(products);
-        setfilteredProducts(products);
       })
       .finally(() => setLoadingProducts(false));
   }, []);
@@ -34,6 +39,9 @@ export default function useProducts() {
     }
     setfilteredProducts(clonedProducts);
   };
+
+  const getProductFromUrl = () =>
+    products.find((p) => p.id == searchParams.get("product"));
 
   const handleSelectedProduct = (product) => {
     setfilteredProducts(product ? [product] : [...products]);
