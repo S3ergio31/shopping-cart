@@ -7,6 +7,7 @@ const SearchBar = ({
   onSelect 
 }) => (
   <Autocomplete
+    sx={{backgroundColor: "white"}}
     options={products}
     autoHighlight
     getOptionLabel={(product) => product.title}
