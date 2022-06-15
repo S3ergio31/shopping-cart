@@ -2,24 +2,16 @@ import axios from "axios";
 
 const API_URL = 'https://fakestoreapi.com';
 
-const makeEndpoint = path => `${API_URL}/${path}`;
+const get = (path) => new Promise((resolve, reject) => {
+    axios.get(`${API_URL}/${path}`)
+         .then(({ data }) => resolve(data))
+         .catch(error => reject(error.response.data));
+}); 
 
-const getAllProducts = () => {
-    return new Promise((resolve, reject) => {
-        axios.get(makeEndpoint('products'))
-             .then(({ data }) => resolve(data))
-             .catch(error => reject(error.response.data));
-    });
-}
+const getAllProducts = () => get('products');
 
-const getAllCategories = () => {
-    return new Promise((resolve, reject) => {
-        axios.get(makeEndpoint('products/categories'))
-             .then(({ data }) => resolve(data))
-             .catch(error => reject(error.response.data));
-    });
-}
-
+const getAllCategories = () => get('products/categories');
+    
 export {
     getAllProducts, 
     getAllCategories
