@@ -46,8 +46,9 @@ const ShoppingToolbarItem = () => {
         onClose={handleClose}
       >
         {cart.map((product) => (
-          <MenuItem onClick={handleClose}>
+          <MenuItem key={product.id} onClick={handleClose}>
             <ProductListItem
+              key={product.id}
               product={product}
               style={{
                 display: "flex",
