@@ -22,12 +22,12 @@ const CartPage = () => {
           <Divider sx={{ my: 2 }} />
           <Grid container spacing={1}>
             {cart.map((product) => (
-              <CartItem product={product} />
+              <CartItem key={product.id} product={product} />
             ))}
             <Grid item xs={6} md={12}>
               <Divider sx={{ my: 2 }} />
               <Typography variant="h5" textAlign="right">
-                Total: ${total}
+                Total: ${total.toFixed(2)}
               </Typography>
             </Grid>
           </Grid>
