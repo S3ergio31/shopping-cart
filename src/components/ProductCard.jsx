@@ -10,7 +10,6 @@ import {
   Rating,
   Tooltip,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { useContext, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -53,9 +52,6 @@ const ProductCard = ({ product }) => {
           <Rating name="read-only" value={product.rating.rate} readOnly />
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
