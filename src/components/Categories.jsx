@@ -3,13 +3,36 @@ import Paper from "@mui/material/Paper";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import ListItem from "../styled-components/ListItem.style";
+import Error from "./Error";
 
-const Categories = ({ 
-  onSelect, 
-  selected, 
-  categories, 
-  loading 
-}) => (
+const Categories = ({ onSelect, selected, categories, loading, error }) => {
+  if (error) {
+    return <Error error={error} />
+  }
+  if (loading) {
+    return (
+      <CategoriesContainer>
+        <CircularProgress />
+      </CategoriesContainer>
+    );
+  }
+  return (
+    <CategoriesContainer>
+      {categories.map((category) => (
+        <ListItem key={category}>
+          <Chip
+            icon={category === selected ? <DoneIcon /> : null}
+            color={category === selected ? "primary" : "default"}
+            label={category}
+            onClick={() => onSelect(category)}
+          />
+        </ListItem>
+      ))}
+    </CategoriesContainer>
+  );
+};
+
+const CategoriesContainer = ({ children }) => (
   <Paper
     sx={{
       display: "flex",
@@ -21,20 +44,7 @@ const Categories = ({
     }}
     component="ul"
   >
-    {loading ? (
-      <CircularProgress />
-    ) : (
-      categories.map((category) => (
-        <ListItem key={category}>
-          <Chip
-            icon={category === selected ? <DoneIcon /> : null}
-            color={category === selected ? "primary" : "default"}
-            label={category}
-            onClick={() => onSelect(category)}
-          />
-        </ListItem>
-      ))
-    )}
+    {children}
   </Paper>
 );
 

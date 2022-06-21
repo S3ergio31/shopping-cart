@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { NotificationContext } from "../context/NotificationProvider";
 import { getAllCategories, getAllProducts } from "../services/products";
 
 export default function useProducts() {
@@ -10,10 +11,18 @@ export default function useProducts() {
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [searchParams] = useSearchParams();
+  const [categoriesError, setCategoriesError] = useState();
+  const [productsError, setProductsError] = useState();
+  const Notification = useContext(NotificationContext);
 
   useEffect(() => {
     getAllCategories()
       .then((categories) => setCategories([...categories, "all"]))
+      .catch(() => {
+        const error = "Categories could not be loaded";
+        setCategoriesError(error)
+        Notification.error(error);
+      })
       .finally(() => setLoadingCategories(false));
   }, []);
 
@@ -25,6 +34,11 @@ export default function useProducts() {
     getAllProducts()
       .then((products) => {
         setProducts(products);
+      })
+      .catch(() => {
+        const error = "Products could not be loaded";
+        Notification.error("Products could not be loaded");
+        setProductsError(error);
       })
       .finally(() => setLoadingProducts(false));
   }, []);
@@ -41,7 +55,7 @@ export default function useProducts() {
   };
 
   const getProductFromUrl = () =>
-    products.find((p) => p.id == searchParams.get("product"));
+    products.find((p) => p.id === parseInt(searchParams.get("product")));
 
   const handleSelectedProduct = (product) => {
     setfilteredProducts(product ? [product] : [...products]);
@@ -54,6 +68,8 @@ export default function useProducts() {
     loadingProducts,
     loadingCategories,
     categories,
+    categoriesError,
+    productsError,
     handleSelectCategory,
     handleSelectedProduct,
   };

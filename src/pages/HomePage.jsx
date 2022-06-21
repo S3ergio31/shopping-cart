@@ -12,6 +12,8 @@ const HomePage = () => {
     loadingProducts,
     loadingCategories,
     categories,
+    categoriesError,
+    productsError,
     handleSelectCategory,
     handleSelectedProduct,
   } = useProducts();
@@ -27,9 +29,14 @@ const HomePage = () => {
         onSelect={handleSelectCategory}
         selected={selectedCategory}
         categories={categories}
+        error={categoriesError}
         loading={loadingCategories}
       />
-      <Products products={filteredProducts} loading={loadingProducts} />
+      <Products
+        products={filteredProducts}
+        loading={loadingProducts}
+        error={productsError}
+      />
     </MainLayout>
   );
 };
