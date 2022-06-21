@@ -31,6 +31,13 @@ const ProductCard = ({ product }) => {
       : `${product.title} removed from cart`;
     Notification.info(message);
   };
+
+  const share = () => {
+    const url = `${document.location.host}?product=${product.id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      Notification.info("Product copied to clipboard");
+    });
+  }
   return (
     <Card>
       <CardActionArea>
@@ -52,7 +59,7 @@ const ProductCard = ({ product }) => {
           <Rating name="read-only" value={product.rating.rate} readOnly />
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="share">
+          <IconButton aria-label="share" onClick={share}>
             <ShareIcon />
           </IconButton>
           <IconButton aria-label="add to cart" onClick={handleAddProductToCart}>
