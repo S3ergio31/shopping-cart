@@ -33,7 +33,10 @@ export default function useProducts() {
   useEffect(() => {
     getAllProducts()
       .then((products) => {
-        setProducts(products);
+        setProducts(products.map(product => ({
+          ...product,
+          price: product.price.toFixed(2)
+        })));
       })
       .catch(() => {
         const error = "Products could not be loaded";
