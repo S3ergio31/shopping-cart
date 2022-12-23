@@ -17,7 +17,7 @@ export default function useProducts() {
 
   useEffect(() => {
     getAllCategories()
-      .then((categories) => setCategories([...categories, "all"]))
+      .then((categories) => setCategories([...categories, {name: "all"}]))
       .catch(() => {
         const error = "Categories could not be loaded";
         setCategoriesError(error)
@@ -49,9 +49,9 @@ export default function useProducts() {
   const handleSelectCategory = (category) => {
     setSelectedCategory(category);
     let clonedProducts = [...products];
-    if (category !== "all") {
+    if (category.name !== "all") {
       clonedProducts = clonedProducts.filter(
-        (product) => product.category === category
+        (product) => product.category.name === category.name
       );
     }
     setfilteredProducts(clonedProducts);
