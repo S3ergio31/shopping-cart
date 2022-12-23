@@ -56,7 +56,7 @@ const ProductCard = ({ product }) => {
           <Typography gutterBottom variant="h5">
             ${product.price}
           </Typography>
-          <Rating name="read-only" value={product.rating.rate} readOnly />
+          <Rating name="read-only" value={product.rate} readOnly />
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="share" onClick={share}>

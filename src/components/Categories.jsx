@@ -19,11 +19,11 @@ const Categories = ({ onSelect, selected, categories, loading, error }) => {
   return (
     <CategoriesContainer>
       {categories.map((category) => (
-        <ListItem key={category}>
+        <ListItem key={category.name}>
           <Chip
-            icon={category === selected ? <DoneIcon /> : null}
-            color={category === selected ? "primary" : "default"}
-            label={category}
+            icon={category.name === selected.name ? <DoneIcon /> : null}
+            color={category.name === selected.name ? "primary" : "default"}
+            label={category.name}
             onClick={() => onSelect(category)}
           />
         </ListItem>

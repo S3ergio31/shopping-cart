@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://fakestoreapi.com';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const get = (path) => new Promise((resolve, reject) => {
     axios.get(`${API_URL}/${path}`)
@@ -10,7 +10,7 @@ const get = (path) => new Promise((resolve, reject) => {
 
 const getAllProducts = () => get('products');
 
-const getAllCategories = () => get('products/categories');
+const getAllCategories = () => get('categories');
     
 export {
     getAllProducts, 
