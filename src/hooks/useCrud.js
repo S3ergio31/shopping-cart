@@ -24,10 +24,8 @@ export default function useCrud(resource) {
   const all = () => {
     get(resource)
       .then((data) => setModels(data))
-      .catch(({ data }) => Notification.error(data.message));
+      .catch(handleError);
   };
-
-  const find = (id) => {};
 
   const findModel = (id) => {
     const isModelWithId = (model) => model.id === id;
@@ -38,7 +36,7 @@ export default function useCrud(resource) {
   };
 
   const handleError = (response) => {
-    const data = response.data;
+    const data = response.data || {};
     if (response.status === 400) {
       setValidationErrors(data);
       return;
@@ -88,7 +86,6 @@ export default function useCrud(resource) {
     saving,
     validationErrors,
     all,
-    find,
     remove,
     upsert,
     resetValidationErrors,
