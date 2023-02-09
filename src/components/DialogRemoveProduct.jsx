@@ -1,12 +1,5 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
 import { useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 
 const DialogRemoveProduct = ({ product, onYes, onNo, show }) => {
   const [open, setOpen] = useState(show);
@@ -17,25 +10,14 @@ const DialogRemoveProduct = ({ product, onYes, onNo, show }) => {
   };
 
   return (
-    <Dialog
-      open={open || show}
+    <ConfirmDialog
+      show={open || show}
       onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      onConfirm={onYes}
+      title="Remove product"
     >
-      <DialogTitle>Remove product</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Do you want to remove "{product.title}" from your cart?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>No</Button>
-        <Button onClick={onYes} autoFocus>
-          Yes
-        </Button>
-      </DialogActions>
-    </Dialog>
+      Do you want to remove "{product.title}" from your cart?
+    </ConfirmDialog>
   );
 };
 
