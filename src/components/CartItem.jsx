@@ -11,7 +11,7 @@ const CartItem = ({ product }) => {
 
   const handleChange = (event) => {
     const count = parseInt(event.target.value);
-    if(count === 0) {
+    if (count === 0) {
       setAskForRemoving(true);
       return;
     }

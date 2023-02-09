@@ -59,7 +59,7 @@ const ShoppingToolbarItem = () => {
           </MenuItem>
         ))}
         <Divider />
-        <Link to="/cart" style={{ textDecoration: 'none', color: "inherit"}}>
+        <Link to="/cart" style={{ textDecoration: "none", color: "inherit" }}>
           <Button sx={{ width: 1 }}>Buy</Button>
         </Link>
       </Menu>

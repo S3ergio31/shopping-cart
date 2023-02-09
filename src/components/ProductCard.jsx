@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
     navigator.clipboard.writeText(url).then(() => {
       Notification.info("Product copied to clipboard");
     });
-  }
+  };
   return (
     <Card>
       <CardActionArea>

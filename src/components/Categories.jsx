@@ -7,7 +7,7 @@ import Error from "./Error";
 
 const Categories = ({ onSelect, selected, categories, loading, error }) => {
   if (error) {
-    return <Error error={error} />
+    return <Error error={error} />;
   }
   if (loading) {
     return (

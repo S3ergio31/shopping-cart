@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 
 const Products = ({ products, loading, error }) => {
   if (error) {
-    return <Error error={error} />
+    return <Error error={error} />;
   }
   if (loading) {
     return (

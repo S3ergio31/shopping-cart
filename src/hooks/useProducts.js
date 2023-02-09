@@ -17,10 +17,10 @@ export default function useProducts() {
 
   useEffect(() => {
     getAllCategories()
-      .then((categories) => setCategories([...categories, {name: "all"}]))
+      .then((categories) => setCategories([...categories, { name: "all" }]))
       .catch(() => {
         const error = "Categories could not be loaded";
-        setCategoriesError(error)
+        setCategoriesError(error);
         Notification.error(error);
       })
       .finally(() => setLoadingCategories(false));
@@ -28,15 +28,17 @@ export default function useProducts() {
 
   useEffect(() => {
     handleSelectedProduct(getProductFromUrl());
-  }, [products])
+  }, [products]);
 
   useEffect(() => {
     getAllProducts()
       .then((products) => {
-        setProducts(products.map(product => ({
-          ...product,
-          price: product.price.toFixed(2)
-        })));
+        setProducts(
+          products.map((product) => ({
+            ...product,
+            price: product.price.toFixed(2),
+          }))
+        );
       })
       .catch(() => {
         const error = "Products could not be loaded";

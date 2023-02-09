@@ -28,7 +28,7 @@ const NotificationProvider = ({ children }) => {
     info,
     warning,
     error,
-    handleClose
+    handleClose,
   };
   return <Provider value={value}>{children}</Provider>;
 };

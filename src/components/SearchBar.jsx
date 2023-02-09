@@ -2,12 +2,9 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import ProductListItem from "./ProductListItem";
 
-const SearchBar = ({ 
-  products, 
-  onSelect 
-}) => (
+const SearchBar = ({ products, onSelect }) => (
   <Autocomplete
-    sx={{backgroundColor: "white"}}
+    sx={{ backgroundColor: "white" }}
     options={products}
     autoHighlight
     getOptionLabel={(product) => product.title}
@@ -20,7 +17,7 @@ const SearchBar = ({
         {...params}
         label="Search a product"
         inputProps={{
-          ...params.inputProps
+          ...params.inputProps,
         }}
       />
     )}

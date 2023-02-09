@@ -20,7 +20,7 @@ const ConfirmDialog = ({
   cancelActionLabel = "No",
   onConfirm = null,
   renderConfirmButton = null,
-  children
+  children,
 }) => {
   return (
     <Modal
@@ -33,9 +33,7 @@ const ConfirmDialog = ({
         <Typography variant="h6" component="h2">
           {title}
         </Typography>
-        <Typography sx={{ mt: 2 }}>
-          {children}
-        </Typography>
+        <Typography sx={{ mt: 2 }}>{children}</Typography>
         <Box
           mt={2}
           display="flex"

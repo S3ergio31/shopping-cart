@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, Divider, Grid, Typography } from "@mui/material";
 import { useContext } from "react";
 import CartItem from "../components/CartItem";
 import { CartContext } from "../context/CartProvider";
