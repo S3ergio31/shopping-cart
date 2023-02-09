@@ -8,25 +8,29 @@ const CartPage = () => {
   const { cart, total } = useContext(CartContext);
   return (
     <MainLayout>
-      <Card sx={{ width: 0.5, margin: "auto" }}>
-        <CardContent>
-          <Typography variant="h5" color="text.secondary" gutterBottom>
-            My shopping list
-          </Typography>
-          <Divider sx={{ my: 2 }} />
-          <Grid container spacing={1}>
-            {cart.map((product) => (
-              <CartItem key={product.id} product={product} />
-            ))}
-            <Grid item xs={6} md={12}>
-              <Divider sx={{ my: 2 }} />
-              <Typography variant="h5" textAlign="right">
-                Total: ${total.toFixed(2)}
+      <Grid container justifyContent="center">
+        <Grid item xs={12} md={6}>
+          <Card >
+            <CardContent>
+              <Typography variant="h5" color="text.secondary" gutterBottom>
+                My shopping list
               </Typography>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+              <Divider sx={{ my: 2 }} />
+              <Grid container spacing={1}>
+                {cart.map((product) => (
+                  <CartItem key={product.id} product={product} />
+                ))}
+                <Grid item xs={6} md={12}>
+                  <Divider sx={{ my: 2 }} />
+                  <Typography variant="h5" textAlign="right">
+                    Total: ${total.toFixed(2)}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </MainLayout>
   );
 };

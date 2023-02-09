@@ -1,4 +1,4 @@
-import { Button, Modal, Typography } from "@mui/material";
+import { Button, Modal, styled, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const style = {
@@ -8,9 +8,19 @@ const style = {
   transform: "translate(-50%, -50%)",
   bgcolor: "white",
   boxShadow: 24,
-  minWidth: 500,
+  maxHeight: "95%",
+  overflowY: "auto",
   p: 4,
 };
+
+const Root = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('xs')]: {
+    width: "80%",
+  },
+  [theme.breakpoints.up('md')]: {
+    width: "50%",
+  },
+}));
 
 const ConfirmDialog = ({
   show,
@@ -29,7 +39,7 @@ const ConfirmDialog = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Root sx={style}>
         <Typography variant="h6" component="h2">
           {title}
         </Typography>
@@ -49,7 +59,7 @@ const ConfirmDialog = ({
           )}
           <Button onClick={onClose}>{cancelActionLabel}</Button>
         </Box>
-      </Box>
+      </Root>
     </Modal>
   );
 };
