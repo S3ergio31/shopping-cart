@@ -6,12 +6,14 @@ import CartHasProducts from "./Guards/CartHasProducts";
 import NotificationProvider from "./context/NotificationProvider";
 import ProductsPage from "./pages/ProductsPage";
 import CategoryPage from "./pages/CategoryPage";
+import LoginPage from "pages/LoginPage";
 
 const App = () => (
   <NotificationProvider>
     <CartProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/cart"
           element={<CartHasProducts Component={CartPage} />}
