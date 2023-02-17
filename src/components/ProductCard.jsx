@@ -17,14 +17,22 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { CartContext } from "../context/CartProvider";
 import ExpandMore from "../styled-components/ExpandMore.style";
 import { NotificationContext } from "../context/NotificationProvider";
+import useAuth from "hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => setExpanded(!expanded);
   const { toggle, isProductOnCart } = useContext(CartContext);
   const Notification = useContext(NotificationContext);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleAddProductToCart = () => {
+    if(!user) {
+      navigate(`/login?product=${product.id}`);
+      return;
+    }
     toggle(product);
     const message = !isProductOnCart(product)
       ? `${product.title} added to cart`
