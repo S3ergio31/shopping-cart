@@ -14,18 +14,18 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useContext, useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { CartContext } from "../context/CartProvider";
-import ExpandMore from "../styled-components/ExpandMore.style";
-import { NotificationContext } from "../context/NotificationProvider";
-import useAuth from "hooks/useAuth";
+import { CartContext } from "context/CartProvider";
+import ExpandMore from "styled-components/ExpandMore.style";
+import { NotificationContext } from "context/NotificationProvider";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "context/UserProvider";
 
 const ProductCard = ({ product }) => {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => setExpanded(!expanded);
   const { toggle, isProductOnCart } = useContext(CartContext);
   const Notification = useContext(NotificationContext);
-  const { user } = useAuth();
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleAddProductToCart = () => {
@@ -52,7 +52,7 @@ const ProductCard = ({ product }) => {
         <CardMedia
           component="img"
           image={product.image}
-          alt="green iguana"
+          alt={product.title}
           height={250}
         />
         <CardContent>

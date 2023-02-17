@@ -1,11 +1,14 @@
 import MainLayout from "layouts/MainLayout";
-import { useEffect, useState } from "react";
-import useAuth from "hooks/useAuth";
-import { Grid, Input, FormGroup, Button, Box, styled, Typography, Divider } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { Grid, FormGroup, Box, styled, Typography, Divider } from "@mui/material";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Error from "components/Error";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import useCrud from "hooks/useCrud";
+import { UserContext } from "context/UserProvider";
+import { CartContext } from "context/CartProvider";
 
 const HiddenGrid = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up('xs')]: {
@@ -17,12 +20,38 @@ const HiddenGrid = styled(Grid)(({ theme }) => ({
 }));
 
 const LoginPage = () => {
-  const { login, loading, user, error } = useAuth();
+  const { login, loading, user, error } = useContext(UserContext);
+  const [ selectedProduct, setSelectedProduct ] = useState();
+
+  const { find } = useCrud('products');
+
+  const { toggle } = useContext(CartContext);
+  
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+
+  const product = searchParams.get('product');
+
   const [data, setData] = useState({
     email: 'user@test.com',
     password: 'password'
   });
+
   const loginBtnLabel = loading ? "Signing in..." : "Login";
+
+  useEffect(() => {
+    product && find(product).then((data) => {
+      setSelectedProduct(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    if(user){
+        selectedProduct && toggle(selectedProduct);
+        navigate('/');
+    }
+  }, [user, selectedProduct]);
 
   const handleChangeData = ({target}) => setData(data => ({
     ...data,

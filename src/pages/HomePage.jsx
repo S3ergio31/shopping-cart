@@ -1,8 +1,8 @@
-import Categories from "../components/Categories";
-import Products from "../components/Products";
-import SearchBar from "../components/SearchBar";
-import useProducts from "../hooks/useProducts";
-import MainLayout from "../layouts/MainLayout";
+import Categories from "components/Categories";
+import Products from "components/Products";
+import SearchBar from "components/SearchBar";
+import useProducts from "hooks/useProducts";
+import MainLayout from "layouts/MainLayout";
 
 const HomePage = () => {
   const {

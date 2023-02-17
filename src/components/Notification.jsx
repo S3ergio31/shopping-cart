@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 import { useContext } from "react";
-import { NotificationContext } from "../context/NotificationProvider";
+import { NotificationContext } from "context/NotificationProvider";
 
 const Notification = () => {
   const { open, message, type, handleClose } = useContext(NotificationContext);

@@ -1,8 +1,12 @@
 import CrudPage from "./CrudPage";
-import useCrud from "../hooks/useCrud";
+import useCrud from "hooks/useCrud";
+import { useEffect } from "react";
 
 const ProductPage = () => {
-    const { models: categories } = useCrud("categories");
+    const { models: categories, all } = useCrud("categories");
+
+    useEffect(all, []);
+    
     return (
         <CrudPage 
             headers={['id', 'title', 'price', {

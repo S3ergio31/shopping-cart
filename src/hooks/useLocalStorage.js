@@ -8,9 +8,12 @@ export default function useLocalStorage(key){
         setValue(value);
     }
 
+    const remove = () => localStorage.removeItem(key);
+
     return {
         value,
-        save
+        save,
+        remove
     }
 
 }

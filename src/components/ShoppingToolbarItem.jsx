@@ -2,7 +2,7 @@ import IconButton from "@mui/material/IconButton";
 import { Badge, Button, Divider, Menu, MenuItem } from "@mui/material";
 import { useContext, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { CartContext } from "../context/CartProvider";
+import { CartContext } from "context/CartProvider";
 import ProductListItem from "./ProductListItem";
 import { Link } from "react-router-dom";
 

@@ -28,6 +28,12 @@ export default function useCart() {
     [units]
   );
 
+  const clear = () => {
+    setCart([]);
+    setUnits([]);
+    setTotal(0);
+  };
+
   useEffect(() => {
     const totalReducer = (subtotal, product) => {
       const partial = product.price * getProductUnits(product.id);
@@ -43,5 +49,6 @@ export default function useCart() {
     isProductOnCart,
     getProductUnits,
     setProductUnits,
+    clear
   };
 }

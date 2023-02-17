@@ -1,6 +1,6 @@
-import NavBar from "../components/NavBar";
+import NavBar from "components/NavBar";
 import { Container } from "@mui/material";
-import Notification from "../components/Notification";
+import Notification from "components/Notification";
 
 const MainLayout = ({ children }) => (
   <>

@@ -2,7 +2,7 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import { CircularProgress } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import ListItem from "../styled-components/ListItem.style";
+import ListItem from "styled-components/ListItem.style";
 import Error from "./Error";
 
 const Categories = ({ onSelect, selected, categories, loading, error }) => {

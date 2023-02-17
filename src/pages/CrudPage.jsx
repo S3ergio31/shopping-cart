@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "layouts/MainLayout";
 import useCrud from "hooks/useCrud";
 import CrudProvider from "context/CrudProvider";
@@ -32,9 +32,12 @@ const CrudPage = ({ headers, resource, searchBy, attributes = [] }) => {
     saving,
     validationErrors,
     remove,
+    all,
     upsert,
     resetValidationErrors,
   } = useCrud(resource);
+
+  useEffect(all, []);
 
   const toggle = () => {
     setShow((s) => !s);

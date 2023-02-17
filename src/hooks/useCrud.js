@@ -1,31 +1,44 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
-import { NotificationContext } from "../context/NotificationProvider";
+import { NotificationContext } from "context/NotificationProvider";
+import useAuth from "./useAuth";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const get = (path) => buildAxiosAction({ method: "get", path });
 
-const buildAxiosAction = ({ method, path, data = {} }) =>
-  new Promise((resolve, reject) => {
-    axios[method](`${API_URL}/${path}`, data)
+const buildAxiosAction = ({ method, path, data = {}, headers = {} }) => {
+  return new Promise((resolve, reject) => {
+    axios[method](`${API_URL}/${path}`, data, headers)
       .then(({ data }) => resolve(data))
       .catch((error) => reject(error.response));
   });
+}
 
 export default function useCrud(resource) {
   const [models, setModels] = useState([]);
   const [saving, setSaving] = useState(false);
   const [validationErrors, setValidationErrors] = useState();
   const Notification = useContext(NotificationContext);
+  const { getBearerHeader } = useAuth();
 
   const resetValidationErrors = () => setValidationErrors(null);
+
+  const getHeaders = () => ({
+    headers: {
+      ...getBearerHeader()
+    }
+  });
 
   const all = () => {
     get(resource)
       .then((data) => setModels(data))
       .catch(handleError);
   };
+
+  const find = id => {
+    return get(`${resource}/${id}`).catch(handleError);
+  }
 
   const findModel = (id) => {
     const isModelWithId = (model) => model.id === id;
@@ -49,7 +62,7 @@ export default function useCrud(resource) {
     const filtered = models.filter((model) => model.id !== id);
     setModels(filtered);
 
-    buildAxiosAction({ method: "delete", path: `${resource}/${id}` })
+    buildAxiosAction({ method: "delete", path: `${resource}/${id}`, data: getHeaders() })
       .then(() => Notification.info(`Element with id=${id} has been deleted`))
       .catch((response) => {
         handleError(response);
@@ -61,7 +74,7 @@ export default function useCrud(resource) {
   const upsert = (data, onSuccess) => {
     setSaving(true);
     resetValidationErrors();
-    buildAxiosAction({ method: "put", path: resource, data })
+    buildAxiosAction({ method: "put", path: resource, data, headers: getHeaders() })
       .then((model) => {
         Notification.info(
           `Element has been ${data.id ? "updated" : "created "} succefully`
@@ -79,8 +92,6 @@ export default function useCrud(resource) {
       .finally(() => setSaving(false));
   };
 
-  useEffect(all, [Notification, resource]);
-
   return {
     models,
     saving,
@@ -88,6 +99,7 @@ export default function useCrud(resource) {
     all,
     remove,
     upsert,
+    find,
     resetValidationErrors,
   };
 }

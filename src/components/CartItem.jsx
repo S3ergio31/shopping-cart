@@ -1,7 +1,7 @@
-import ProductListItem from "../components/ProductListItem";
+import ProductListItem from "components/ProductListItem";
 import { Grid, Input } from "@mui/material";
 import { useContext, useState } from "react";
-import { CartContext } from "../context/CartProvider";
+import { CartContext } from "context/CartProvider";
 import DialogRemoveProduct from "./DialogRemoveProduct";
 
 const CartItem = ({ product }) => {
